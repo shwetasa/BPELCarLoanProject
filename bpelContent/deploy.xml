@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:carloans="http://carloans" xmlns:customer="http://soapwebservice.com/customer" xmlns:soap="http://creditscoresoapservice.com/soap" xmlns:soap_1="http://loansoapservice.com/soap">
+  <process name="carloans:BPELCarProcess">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="carloans:BPELCarProcessService" port="BPELCarProcessPort"/>
+    </provide>
+    <invoke partnerLink="CustomerServicePL">
+      <service name="customer:CustomerPortService" port="CustomerPortSoap11"/>
+    </invoke>
+    <invoke partnerLink="CreditScoreServicePL">
+      <service name="soap:CreditscorePortService" port="CreditscorePortSoap11"/>
+    </invoke>
+    <invoke partnerLink="CarLoanServicePL">
+      <service name="soap_1:CarLoansPortService" port="CarLoansPortSoap11"/>
+    </invoke>
+  </process>
+</deploy>
